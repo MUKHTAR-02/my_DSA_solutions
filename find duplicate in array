@@ -1,34 +1,8 @@
 // prog to find the duplicate number
 // (this logic is not suitable for large array, coz it exceeds time limit)
-// but it was solved by O(n) time complexity...even indirectly i ran 2 loops here (innovative method)
+// i indirectly iterated 2 loops here (innovative method)
 #include <iostream>
 using namespace std;
-
-int findDuplicate(int arr[], int n) {
-    int j=0;
-    int count=0;
-    for(int i=0; i<n; i++) {
-        // cout << "for loop mai" << endl;
-        
-        if(j==4) {
-            cout << "Not found" << endl;
-            return -1;
-        }
-        if((arr[i] == arr[j]) && (i != j)) {
-            cout << "Duplicate found = " << arr[i] << endl;
-            return 0;
-        }
-        
-        if(count == 4) {
-            // cout << "flag" << endl;
-            count = 0;
-            i = 0;
-            j++;
-        }
-        count++;
-    }
-    // cout << "nhi mila" << endl;
-}
 
 void printArray(int arr[], int n) {
     for(int i=0; i<n; i++) {
@@ -36,10 +10,32 @@ void printArray(int arr[], int n) {
     }cout << endl;
 }
 
+void findDuplicate(int arr[], int n) {
+    int j=0;
+    for(int i=j+1; i<n; i++) {
+        if(j == (n-1)) {
+            cout << "no duplicate found" << endl;
+        }
+        else if((arr[i] == arr[j]) && (i != j)) {
+            cout << "found = " << arr[i] << endl;
+        }
+        else if(i == (n-1)) {
+            j++;
+            i = j;
+        }
+    }
+}
+
 int main() {
-    int n = 5;
-    int arr[n] = {3,1,3,4,2};
-    findDuplicate(arr, n);
-    printArray(arr, n);
+    int n;
+    cout << "enter size: ";
+    cin >> n;
+    int arr[n];
+    cout << "enter elements: ";
+    for(int i=0; i<n; i++) {
+        cin >> arr[i];
+    }
+    printArray(arr,n);
+    findDuplicate(arr,n);
     return 0;
 }
